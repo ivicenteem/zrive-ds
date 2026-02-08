@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Project for the program Zrive Applied Data Science"
 authors = ["Guille Barquero <gb@zriveapp.com>"]
 readme = "README.md"
-packages = [{include = "module_1", from = "src"}, {include = "tests"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
