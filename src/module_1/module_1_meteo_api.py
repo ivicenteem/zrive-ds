@@ -19,7 +19,7 @@ COORDINATES = {
 }
 VARIABLES = ["temperature_2m_mean", "precipitation_sum", "wind_speed_10m_max"]
 
-def _request_with_cooloff(url: str, headers: dict, num_attempts: int, payload: dict | None = None):
+def _request_with_cooloff(url: str, headers: dict, num_attempts: int, payload: dict | None = None) -> requests.Response:    
     # Funcion interna para hacer la peticion. Si la API da error por saturacion, 
     # hace reintentos esperando cada vez mas tiempo (cooloff)
     cooloff = 1
@@ -52,12 +52,12 @@ def _request_with_cooloff(url: str, headers: dict, num_attempts: int, payload: d
                 continue
             raise
 
-def request_wrapper(url: str, headers: dict = {}, payload: dict | None = None):
+def request_wrapper(url: str, headers: dict = {}, payload: dict | None = None) -> dict:    
     # Helper que llama a la funcion de arriba y ya nos devuelve el JSON listo para usar
     res = _request_with_cooloff(url, headers, num_attempts=5, payload=payload)
     return json.loads(res.content.decode("utf-8"))
 
-def get_data_meteo_api(longitude: float, latitude: float, start_date: str, end_date: str):
+def get_data_meteo_api(longitude: float, latitude: float, start_date: str, end_date: str) -> dict:
     # Prepara los parametros y construye la url final para descargar los datos de una ciudad
     params = {
         "latitude": latitude,
@@ -91,7 +91,7 @@ def compute_monthly_statistics(data: pd.DataFrame, meteo_variables: list[str]) -
 
     return pd.DataFrame(results)
 
-def plot_timeseries(data: pd.DataFrame):
+def plot_timeseries(data: pd.DataFrame) -> None:    
     # Pinta los graficos creando una cuadricula: filas = variables, columnas = ciudades
     rows = len(VARIABLES)
     cols = len(data["city"].unique())
@@ -125,7 +125,7 @@ def plot_timeseries(data: pd.DataFrame):
     # Guardamos la imagen directamente en la carpeta
     plt.savefig("src/module_1/climate_evolution.png", bbox_inches="tight")
 
-def main():
+def main() -> None:    
     all_data = []
     start = "2010-01-01"
     end = "2020-12-31"
