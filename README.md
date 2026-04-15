@@ -72,3 +72,4 @@ Los datos encontraréis disponibles en s3 son:
 
 La primera vez que vayais a trabajar con los datos, debeis descargarlos utilizando python `boto3` o `AWS CLI` y a partir de ahí guardarlos en local para evitar tener que descargarlos cada vez (IMPORTANTE: Se considera una buena práctica no añadir datos a vuestros repositorios de código ya que eso haría el repositorio muy pesado y todas las operaciones de version control muy lentas.)
 
+ 
