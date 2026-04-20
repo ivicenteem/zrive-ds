@@ -165,3 +165,6 @@ data/
 
 # macOS metadata
 .DS_Store
+
+# Trained models (binary, not committed)
+models/
